@@ -1,37 +1,40 @@
 #include <iostream>
+#include <fstream>
 #pragma warning(disable:4996)
 
 using namespace std;
 
 class People {
 private:
-	const char* m_id;
-	const char* m_pw;
+	char* m_ID;
+	char* m_PW;
+	char* m_name;
 
-	char *selDiet; // 다이어트 방식 저장(쇼에 출력용)
-	char* m_sex;
-	int m_weight = 80;
-	int m_height = 175;
-	int m_age = 20;
+	char* selDiet; // 다이어트 방식 저장(쇼에 출력용)
+	int m_sex;
+	double m_original_weight;
+	double m_changed_weight;
+	double m_height;
+	int m_age;
 
-	int m_BMI = 0; // 표준체중
-	int m_muscle = 0; //근육량
-	int m_bodyFat = 0; // 체지방
-	int m_metabolism = 0; 
+	double m_BMI; // 표준체중
+	double m_muscle; //근육량
+	double m_bodyFat; // 체지방
+	double m_metabolism; //기초대사량
 
-	int m_goalWeight;
-	int m_dietPeriod;
+	double m_goalWeight;
+	int m_start;
+	int m_end;
 
 public:
-	People(const char* id, const char* pw);
-	~People();
+	People(const char* _name, const char* _ID, const char* _PW, double _weight, double _height, int _start, int _end, int _goal_weight, int _sex);
 
-	char* getSex();
+	int getSex();
 	int getWeight();
 	int getHeight();
 	int getAge();
 
-	void setSex(char* sex);
+	void setSex(int sex);
 	void setWeight(int weight);
 	void setHeight(int height);
 	void setAge(int age);
@@ -43,29 +46,42 @@ public:
 	//void matching(); // 친구와 매칭시켜주는 함수
 	//void chooseMeal(); //하루한끼 고르는 함수 -> 0-1 knapsack으로 나머지 끼니 입력
 	void chooseDiet(); // 원하는 식단 고르기
-					   //bool login();
+	//bool login();
 
-	void start();
+	//void start();
 
 };
 
-
-People::People(const char* id, const char* pw)
-	:m_id(id), m_pw(pw)
+People::People(const char* _name, const char* _ID, const char* _PW, double _weight, double _height, int _start, int _end, int _goal_weight, int _sex)
+:m_original_weight(_weight), m_height(_height), m_changed_weight(0), m_start(_start), m_end(_end), m_BMI(0), m_goalWeight(_goal_weight)
 {
+	int len = strlen(_name);
+	m_name = new char[len + 1];
+	strcpy(m_name, _name);
 
-}
+	len = strlen(_ID);
+	m_ID = new char[len + 1];
+	strcpy(m_ID, _ID);
 
-People::~People() {
-	delete[] m_id;
-	delete[] m_pw;
-}
+	len = strlen(_PW);
+	m_PW = new char[len + 1];
+	strcpy(m_PW, _PW);
+
+	m_BMI = 0;    /// 계산 
+	m_muscle = 0;
+	m_bodyFat = 0;
+	m_metabolism = 0;
+
+	ofstream userin("userinfo.txt", ios::app);
+	userin << m_name << " " << m_ID << " " << m_PW << " " << m_original_weight << " " << m_height << " ";
+};
+
 //////////////////////////////////////////////////////People get 함수
-char* People::getSex() {
+int People::getSex() {
 	return m_sex;
 }
 int People::getWeight() {
-	return m_weight;
+	return m_original_weight;
 }
 int People::getHeight() {
 	return m_height;
@@ -74,14 +90,13 @@ int People::getAge() {
 	return m_age;
 }
 //////////////////////////////////////////////////////People set 함수
-void People::setSex(char* sex) {
-	delete[] m_sex;
-	int len = strlen(sex);
-	m_sex = new char[len + 1];
-	strcpy(m_sex, sex);
+
+void People::setSex(int sex) {
+
+	m_sex = sex;
 }
 void People::setWeight(int weight) {
-	m_weight = weight;
+	m_original_weight = weight;
 }
 void People::setHeight(int height) {
 	m_height = height;
@@ -89,6 +104,111 @@ void People::setHeight(int height) {
 void People::setAge(int age) {
 	m_age = age;
 }
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+class People_handler
+{
+private:
+	People* people_Arr[50];
+	int peopleNum;
+
+public:
+	People_handler() :peopleNum(0) {};
+	void make_user();     // 회원가입
+	void show_main();
+	void start();
+	void login();         // login
+};
+
+void People_handler::make_user()
+{
+	char t_name[20];
+	char t_ID[20];
+	char t_PW[20];
+
+	double t_original_weight;
+	double t_height;
+	int t_sex;
+
+	double t_BMI;
+
+	int t_goal_weight;
+
+	int t_start;
+	int t_end;
+
+	cout << " 아이디 : ";
+	cin >> t_ID;
+	cout << " 비밀번호 : ";
+	cin >> t_PW;
+	cout << " 이름 : ";
+	cin >> t_name;
+	cout << " 몸무게 : ";
+	cin >> t_original_weight;
+	cout << " 키 : ";
+	cin >> t_height;
+	cout << " 목표 체중 : ";
+	cin >> t_goal_weight;
+
+	cout << " 성별 : (1.남성, 2.여성)";
+	cin >> t_sex;
+
+	cout << " 목표 기간 " << endl;
+
+	cout << "시작 날짜 : ";
+	cin >> t_start;
+	cout << "마지막 날짜 : ";
+	cin >> t_end;
+
+	t_BMI = 50;
+
+	cout << endl;
+
+	people_Arr[peopleNum++] = new People(t_name, t_ID, t_PW, t_original_weight, t_height, t_start, t_end, t_goal_weight, t_sex);
+}
+
+void People_handler::start() {
+	cout << "test" << endl;
+	while (1) {
+		cout << "식단관리 시스템" << endl;
+		cout << "1) 개인정보입력 2)식단선택 3)매칭친구 찾기 4)오늘의 한끼고르기 5) 스케줄러보기 6) 종료" << endl;
+		cout << "메뉴를 선택하세요 : ";
+
+		int menu;
+		cin >> menu;
+
+		switch (menu) {
+		case 1:
+			/*
+			if (login()) {
+
+			}*/
+			break;
+		case 2:
+			//chooseDiet();
+			break;
+		case 3:
+			//matching();
+			break;
+		case 4:
+			//chooseMeal();
+			break;
+		case 5:
+			//showSchedule();
+			break;
+		case 6:
+			return; // 이 함수를 종료할 때 씀
+
+		default:
+			break;
+
+		}
+
+	}
+
+}
+
 
 
 class Food {
@@ -141,47 +261,6 @@ public:
 
 };
 
-void People::start() {
-	cout << "test" << endl;
-	while (1) {
-		cout << "식단관리 시스템" << endl;
-		cout << "1) 개인정보입력 2)식단선택 3)매칭친구 찾기 4)오늘의 한끼고르기 5) 스케줄러보기 6) 종료" << endl;
-		cout << "메뉴를 선택하세요 : ";
-
-		int menu;
-		cin >> menu;
-
-		switch (menu) {
-		case 1:
-			/*
-			if (login()) {
-
-			}*/
-			break;
-		case 2:
-			chooseDiet();
-			break;
-		case 3:
-			//matching();
-			break;
-		case 4:
-			//chooseMeal();
-			break;
-		case 5:
-			//showSchedule();
-			break;
-		case 6:
-			return; // 이 함수를 종료할 때 씀
-
-		default:
-			break;
-
-		}
-
-	}
-
-}
-
 void People::chooseDiet() {
 	// 원하는 식단/추천다이어트 선택
 	int input1 = 0;
@@ -230,10 +309,10 @@ void People::chooseDiet() {
 
 	}
 }
-int main() {
-	People jungbin("jeon", "1234"); //ID와 비밀번호 입력
+int main()
+{
 
-	jungbin.start();
+
 
 
 	return 0;
