@@ -12,7 +12,7 @@ private:
 
 	char* selDiet; // 다이어트 방식 저장(쇼에 출력용)
 	int m_sex;
-	double m_original_weight;
+	double m_original_weight; //기준체중
 	double m_changed_weight;
 	double m_height;
 	int m_age;
