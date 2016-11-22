@@ -164,7 +164,7 @@ void People_handler::make_user()
 	t_BMI = 50;
 
 	cout << endl;
-
+	////////////  test
 	people_Arr[peopleNum++] = new People(t_name, t_ID, t_PW, t_original_weight, t_height, t_start, t_end, t_goal_weight, t_sex);
 }
 
