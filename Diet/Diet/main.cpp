@@ -17,7 +17,7 @@ private:
 	int m_BMI = 0; // 표준체중
 	int m_muscle = 0; //근육량
 	int m_bodyFat = 0; // 체지방
-	int m_metabolism = 0; //기초대사량
+	int m_metabolism = 0; 
 
 	int m_goalWeight;
 	int m_dietPeriod;
