@@ -172,7 +172,7 @@ void People_handler::start() {
 	cout << "test" << endl;
 	while (1) {
 		cout << "식단관리 시스템" << endl;
-		cout << "1) 개인정보입력 2)식단선택 3)매칭친구 찾기 4)오늘의 한끼고르기 5) 스케줄러보기 6) 종료" << endl;
+		cout << "1) 개인정보 2)매칭시스템 3)식단선택 4)추천운동 5)음식선택 6) 종료" << endl;
 		cout << "메뉴를 선택하세요 : ";
 
 		int menu;
