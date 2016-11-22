@@ -10,17 +10,17 @@ private:
 	char* m_PW;
 	char* m_name;
 
-	char* selDiet; // ´ÙÀÌ¾îÆ® ¹æ½Ä ÀúÀå(¼î¿¡ Ãâ·Â¿ë)
+	char* selDiet; // ë‹¤ì´ì–´íŠ¸ ë°©ì‹ ì €ì¥(ì‡¼ì— ì¶œë ¥ìš©)
 	int m_sex;
-	double m_original_weight; //±âÁØÃ¼Áß
+	double m_original_weight; //ê¸°ì¤€ì²´ì¤‘
 	double m_changed_weight;
 	double m_height;
 	int m_age;
 
-	double m_BMI; // Ç¥ÁØÃ¼Áß
-	double m_muscle; //±ÙÀ°·®
-	double m_bodyFat; // Ã¼Áö¹æ
-	double m_metabolism; //±âÃÊ´ë»ç·®
+	double m_BMI; // í‘œì¤€ì²´ì¤‘
+	double m_muscle; //ê·¼ìœ¡ëŸ‰
+	double m_bodyFat; // ì²´ì§€ë°©
+	double m_metabolism; //ê¸°ì´ˆëŒ€ì‚¬ëŸ‰
 
 	double m_goalWeight;
 	int m_start;
@@ -40,20 +40,20 @@ public:
 	void setAge(int age);
 
 
-	//void showPeople(); // ÇÑ »ç¶÷ÀÇ Á¤º¸¸¦ º¸¿©ÁÖ´Â ÇÔ¼ö
-	//void showResult(); // ÇÏ·çÇÏ·çÀÇ °á°ú¸¦ º¸¿©ÁÖ´Â show ÇÔ¼ö
-	//void showSchedule(); // ÁøÇà»óÅÂ¸¦ º¸¿©ÁÜ
-	//void matching(); // Ä£±¸¿Í ¸ÅÄª½ÃÄÑÁÖ´Â ÇÔ¼ö
-	//void chooseMeal(); //ÇÏ·çÇÑ³¢ °í¸£´Â ÇÔ¼ö -> 0-1 knapsackÀ¸·Î ³ª¸ÓÁö ³¢´Ï ÀÔ·Â
-	void chooseDiet(); // ¿øÇÏ´Â ½Ä´Ü °í¸£±â
-	//bool login();
+	//void showPeople(); // í•œ ì‚¬ëŒì˜ ì •ë³´ë¥¼ ë³´ì—¬ì£¼ëŠ” í•¨ìˆ˜
+	//void showResult(); // í•˜ë£¨í•˜ë£¨ì˜ ê²°ê³¼ë¥¼ ë³´ì—¬ì£¼ëŠ” show í•¨ìˆ˜
+	//void showSchedule(); // ì§„í–‰ìƒíƒœë¥¼ ë³´ì—¬ì¤Œ
+	//void matching(); // ì¹œêµ¬ì™€ ë§¤ì¹­ì‹œì¼œì£¼ëŠ” í•¨ìˆ˜
+	//void chooseMeal(); //í•˜ë£¨í•œë¼ ê³ ë¥´ëŠ” í•¨ìˆ˜ -> 0-1 knapsackìœ¼ë¡œ ë‚˜ë¨¸ì§€ ë¼ë‹ˆ ì…ë ¥
+	void chooseDiet(); // ì›í•˜ëŠ” ì‹ë‹¨ ê³ ë¥´ê¸°
+					   //bool login();
 
-	//void start();
+					   //void start();
 
 };
 
 People::People(const char* _name, const char* _ID, const char* _PW, double _weight, double _height, int _start, int _end, int _goal_weight, int _sex)
-:m_original_weight(_weight), m_height(_height), m_changed_weight(0), m_start(_start), m_end(_end), m_BMI(0), m_goalWeight(_goal_weight)
+	:m_original_weight(_weight), m_height(_height), m_changed_weight(0), m_start(_start), m_end(_end), m_BMI(0), m_goalWeight(_goal_weight)
 {
 	int len = strlen(_name);
 	m_name = new char[len + 1];
@@ -67,7 +67,7 @@ People::People(const char* _name, const char* _ID, const char* _PW, double _weig
 	m_PW = new char[len + 1];
 	strcpy(m_PW, _PW);
 
-	m_BMI = 0;    /// °è»ê 
+	m_BMI = 0;    /// ê³„ì‚° 
 	m_muscle = 0;
 	m_bodyFat = 0;
 	m_metabolism = 0;
@@ -76,7 +76,7 @@ People::People(const char* _name, const char* _ID, const char* _PW, double _weig
 	userin << m_name << " " << m_ID << " " << m_PW << " " << m_original_weight << " " << m_height << " ";
 };
 
-//////////////////////////////////////////////////////People get ÇÔ¼ö
+//////////////////////////////////////////////////////People get í•¨ìˆ˜
 int People::getSex() {
 	return m_sex;
 }
@@ -89,7 +89,7 @@ int People::getHeight() {
 int People::getAge() {
 	return m_age;
 }
-//////////////////////////////////////////////////////People set ÇÔ¼ö
+//////////////////////////////////////////////////////People set í•¨ìˆ˜
 
 void People::setSex(int sex) {
 
@@ -115,7 +115,7 @@ private:
 
 public:
 	People_handler() :peopleNum(0) {};
-	void make_user();     // È¸¿ø°¡ÀÔ
+	void make_user();     // íšŒì›ê°€ì…
 	void show_main();
 	void start();
 	void login();         // login
@@ -138,27 +138,27 @@ void People_handler::make_user()
 	int t_start;
 	int t_end;
 
-	cout << " ¾ÆÀÌµğ : ";
+	cout << " ì•„ì´ë”” : ";
 	cin >> t_ID;
-	cout << " ºñ¹Ğ¹øÈ£ : ";
+	cout << " ë¹„ë°€ë²ˆí˜¸ : ";
 	cin >> t_PW;
-	cout << " ÀÌ¸§ : ";
+	cout << " ì´ë¦„ : ";
 	cin >> t_name;
-	cout << " ¸ö¹«°Ô : ";
+	cout << " ëª¸ë¬´ê²Œ : ";
 	cin >> t_original_weight;
-	cout << " Å° : ";
+	cout << " í‚¤ : ";
 	cin >> t_height;
-	cout << " ¸ñÇ¥ Ã¼Áß : ";
+	cout << " ëª©í‘œ ì²´ì¤‘ : ";
 	cin >> t_goal_weight;
 
-	cout << " ¼ºº° : (1.³²¼º, 2.¿©¼º)";
+	cout << " ì„±ë³„ : (1.ë‚¨ì„±, 2.ì—¬ì„±)";
 	cin >> t_sex;
 
-	cout << " ¸ñÇ¥ ±â°£ " << endl;
+	cout << " ëª©í‘œ ê¸°ê°„ " << endl;
 
-	cout << "½ÃÀÛ ³¯Â¥ : ";
+	cout << "ì‹œì‘ ë‚ ì§œ : ";
 	cin >> t_start;
-	cout << "¸¶Áö¸· ³¯Â¥ : ";
+	cout << "ë§ˆì§€ë§‰ ë‚ ì§œ : ";
 	cin >> t_end;
 
 	t_BMI = 50;
@@ -171,9 +171,9 @@ void People_handler::make_user()
 void People_handler::start() {
 	cout << "test" << endl;
 	while (1) {
-		cout << "½Ä´Ü°ü¸® ½Ã½ºÅÛ" << endl;
-		cout << "1) °³ÀÎÁ¤º¸ 2)¸ÅÄª½Ã½ºÅÛ 3)½Ä´Ü¼±ÅÃ 4)ÃßÃµ¿îµ¿ 5)À½½Ä¼±ÅÃ 6) Á¾·á" << endl;
-		cout << "¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ";
+		cout << "ì‹ë‹¨ê´€ë¦¬ ì‹œìŠ¤í…œ" << endl;
+		cout << "1) ê°œì¸ì •ë³´ 2)ë§¤ì¹­ì‹œìŠ¤í…œ 3)ì‹ë‹¨ì„ íƒ 4)ì¶”ì²œìš´ë™ 5)ìŒì‹ì„ íƒ 6) ì¢…ë£Œ" << endl;
+		cout << "ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ";
 
 		int menu;
 		cin >> menu;
@@ -198,7 +198,7 @@ void People_handler::start() {
 			//showSchedule();
 			break;
 		case 6:
-			return; // ÀÌ ÇÔ¼ö¸¦ Á¾·áÇÒ ¶§ ¾¸
+			return; // ì´ í•¨ìˆ˜ë¥¼ ì¢…ë£Œí•  ë•Œ ì”€
 
 		default:
 			break;
@@ -213,8 +213,8 @@ void People_handler::start() {
 
 class Food {
 private:
-	int m_fat;		//Áö¹æ
-	int m_protein;	//´Ü¹éÁú
+	int m_fat;		//ì§€ë°©
+	int m_protein;	//ë‹¨ë°±ì§ˆ
 	int m_carbo;
 public:
 
@@ -229,7 +229,7 @@ public:
 
 };
 
-//////////////////////////////////////////////////////Food get ÇÔ¼ö
+//////////////////////////////////////////////////////Food get í•¨ìˆ˜
 int Food::getFat() {
 	return m_fat;
 }
@@ -240,7 +240,7 @@ int Food::getCarbo() {
 	return m_carbo;
 }
 
-//////////////////////////////////////////////////////Food set ÇÔ¼ö
+//////////////////////////////////////////////////////Food set í•¨ìˆ˜
 void Food::setFat(int fat) {
 	m_fat = fat;
 }
@@ -254,58 +254,58 @@ void Food::setCarbo(int carbo) {
 
 class Exercise {
 private:
-	int consumeCal;	//¼ÒºñÄ®·Î¸®
-	int time;		//½Ã°£
+	int consumeCal;	//ì†Œë¹„ì¹¼ë¡œë¦¬
+	int time;		//ì‹œê°„
 public:
 
 
 };
 
 void People::chooseDiet() {
-	// ¿øÇÏ´Â ½Ä´Ü/ÃßÃµ´ÙÀÌ¾îÆ® ¼±ÅÃ
+	// ì›í•˜ëŠ” ì‹ë‹¨/ì¶”ì²œë‹¤ì´ì–´íŠ¸ ì„ íƒ
 	int input1 = 0;
 
-	cout << "1) »ç¿ëÀÚ ½Ä´Ü / 2)¾îÇÃ¸®ÄÉÀÌ¼Ç ÃßÃµ ½Ä´Ü" << endl;
+	cout << "1) ì‚¬ìš©ì ì‹ë‹¨ / 2)ì–´í”Œë¦¬ì¼€ì´ì…˜ ì¶”ì²œ ì‹ë‹¨" << endl;
 	cin >> input1;
 
 	if (input1 == 1) {
 		int input2 = 0;
 
-		cout << "¿øÇÏ´Â ´ÙÀÌ¾îÆ® ¹æ½ÄÀ» ¼±ÅÃÇÏ¼¼¿ä" << endl;
-		cout << "1)°íÁö¹æÀúÅº¼ö 2)°í´Ü¹é 3)ÀúÁö¹æ 4)ÀúÄ®·Î¸® 5) ÆÄ¿ö¿îµ¿" << endl;
+		cout << "ì›í•˜ëŠ” ë‹¤ì´ì–´íŠ¸ ë°©ì‹ì„ ì„ íƒí•˜ì„¸ìš”" << endl;
+		cout << "1)ê³ ì§€ë°©ì €íƒ„ìˆ˜ 2)ê³ ë‹¨ë°± 3)ì €ì§€ë°© 4)ì €ì¹¼ë¡œë¦¬ 5) íŒŒì›Œìš´ë™" << endl;
 		cin >> input2;
 
 		if (input2 == 1) {
-			selDiet = "°íÁö¹æÀúÅº¼ö";
+			selDiet = "ê³ ì§€ë°©ì €íƒ„ìˆ˜";
 		}
 		else if (input2 == 2) {
-			selDiet = "°í´Ü¹é";
+			selDiet = "ê³ ë‹¨ë°±";
 		}
 		else if (input2 == 3) {
-			selDiet = "ÀúÁö¹æ";
+			selDiet = "ì €ì§€ë°©";
 		}
 		else if (input2 == 4) {
-			selDiet = "ÀúÄ®·Î¸®";
+			selDiet = "ì €ì¹¼ë¡œë¦¬";
 		}
 		else if (input2 == 5) {
-			selDiet = "ÆÄ¿ö¿îµ¿";
+			selDiet = "íŒŒì›Œìš´ë™";
 		}
 		else {
-			cout << "º¸±â¿¡ ¹æ½ÄÀ» °ñ¶óÁÖ¼¼¿ä" << endl;
+			cout << "ë³´ê¸°ì— ë°©ì‹ì„ ê³¨ë¼ì£¼ì„¸ìš”" << endl;
 		}
 
 	}
 	else if (input1 == 2) {
-		//bmiÁö¼ö
-		//Ã¼Áö¹æ = Ã¼Áß-Á¦Áö¹æ
-		//Á¦Áö¹æ = (1.07*Ã¼Áß) - (128*Ã¼Áß^2/Å°^2)
+		//bmiì§€ìˆ˜
+		//ì²´ì§€ë°© = ì²´ì¤‘-ì œì§€ë°©
+		//ì œì§€ë°© = (1.07*ì²´ì¤‘) - (128*ì²´ì¤‘^2/í‚¤^2)
 		m_BMI = getWeight() / (getHeight()*getHeight());
 		m_muscle = (1.07*getWeight()) - (128 * (getWeight()*getWeight()) / (getHeight()*getHeight()));
 		m_bodyFat = getWeight() - m_muscle;
 
-		cout << "BMI Áö¼ö : " << m_BMI << endl;
-		cout << "Ã¼Áö¹æ Áö¼ö : " << m_bodyFat << endl;
-		cout << "±ÙÀ°·® Áö¼ö : " << m_muscle << endl;
+		cout << "BMI ì§€ìˆ˜ : " << m_BMI << endl;
+		cout << "ì²´ì§€ë°© ì§€ìˆ˜ : " << m_bodyFat << endl;
+		cout << "ê·¼ìœ¡ëŸ‰ ì§€ìˆ˜ : " << m_muscle << endl;
 
 	}
 }
@@ -313,7 +313,7 @@ int main()
 {
 
 
-
+	//Jeon
 
 	return 0;
 }
